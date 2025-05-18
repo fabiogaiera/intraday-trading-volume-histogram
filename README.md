@@ -1,4 +1,4 @@
-Transitioning from OneTick to KX products: A Series of Use Cases
+# Transitioning from OneTick to KX products: A Series of Use Cases
 
 While migrating tick data from OneTick to kdb+, one of the more straightforward aspects is handling raw trade and quote
 data. This is because such data can often be re-sourced from market data providers. Therefore, the main focus during
