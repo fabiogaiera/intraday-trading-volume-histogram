@@ -26,7 +26,7 @@ Potential enhancements for this use case:
 
 - Consider building a kdb+tick architecture when creating a real-time database and historical database with tick data.
 
-**Alpaca Trading API Documentation**
+**Alpaca Trading API Documentation (Required in case you want to download market data)**
 
 Historical trades (single symbol): [Stock Trades](https://docs.alpaca.markets/reference/stocktradesingle-1)
 
