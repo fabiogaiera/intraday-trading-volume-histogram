@@ -17,10 +17,12 @@ datetime,sym,price,size
 def create_histogram(csv_file_path):
 
     # Upload a CSV file into a kdb+ table
-    kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
+    # kx.q(f'trades: ("PSFJ";enlist ",") 0: `$":{csv_file_path}"')
+    trades = kx.q.read.csv(csv_file_path, 'PSFJ')
 
     # Execute a qSQL query using xbar to bucket the minutes into hours
-    trades_table = kx.q('select count i by 60 xbar datetime.minute from trades')
+    # trades_table = kx.q('select count i by 60 xbar datetime.minute from trades')
+    trades_table = trades.select(kx.Column('i').count(), by=kx.Column('datetime').minute.xbar(60))
 
     # Seamless integration with existent Python code (pandas and Matplotlib libraries)
 
@@ -30,7 +32,7 @@ def create_histogram(csv_file_path):
 
     fig, ax = plt.subplots()
 
-    df.groupby('minute')['x'].sum().plot(kind='bar', ax=ax)
+    df.groupby('datetime')['i'].sum().plot(kind='bar', ax=ax)
 
     ax.set_title("Intraday Trading Volume Histogram")
     ax.set_xlabel('Hour')
